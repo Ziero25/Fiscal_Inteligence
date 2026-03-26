@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiscal Community UI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-body no-scroll">
+    <!-- Loader -->
+    <div id="pageLoader" class="page-loader">
+        <div class="loader-content">
+            <div class="loader-bolt">⚡</div>
+            <div class="loader-text">Carregando Radar...</div>
+        </div>
+    </div>
+
+    <div id="mainContent" class="content-fade-in" style="opacity: 0;">
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo" style="text-decoration: none;">
+                <div class="logo-icon">⚡</div>
+                <span class="logo-text"><span class="logo-bold">Fiscal</span><span class="logo-light">Intelligence</span></span>
+            </a>
+            <div class="header-right">
+                <a href="index.html" style="color: #94a3b8; text-decoration: none; margin-right: 20px; font-weight: 500;">Início</a>
+                <div class="search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" placeholder="Buscar notas ou editais...">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="hero-section">
+        <div class="hero-content">
+            <div class="breadcrumbs">
+                Início > Visão Geral > Discussões
+            </div>
+            <h1>Discussões</h1>
+            <p>Junte-se à Comunidade Fiscal BR</p>
+            <div class="search-bar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="searchInput" placeholder="Pesquise tópicos, tags ou notas...">
+            </div>
+        </div>
+        <div class="hero-bg-circles"></div>
+    </main>
+
+    <div class="content-wrapper">
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-tab="ALL"><span class="tab-icon">📦</span> Todos</button>
+            <button class="filter-tab" data-tab="Fiscal"><span class="tab-icon">🛡️</span> Fiscal & SEFAZ</button>
+            <button class="filter-tab" data-tab="Contabil"><span class="tab-icon">👥</span> Comunidade</button>
+        </div>
+
+        <!-- Filtros de Data (Persistente) -->
+        <div class="sub-filter-container date-filter-container">
+            <div class="sub-filter-label">Recente:</div>
+            <div class="sub-filter-tabs">
+                <button class="sub-filter-tab active date-tab" data-date="ALL">Tudo</button>
+                <button class="sub-filter-tab date-tab" data-date="TODAY">Hoje</button>
+                <button class="sub-filter-tab date-tab" data-date="WEEK">Esta Semana</button>
+                <button class="sub-filter-tab date-tab" data-date="MONTH">Este Mês</button>
+            </div>
+        </div>
+
+        <!-- Subfiltros para Fiscal (Escondidos por padrão) -->
+        <div class="sub-filter-container" id="fiscalSubContainer" style="display: none;">
+            <div class="sub-filter-label">Tipo (Fiscal):</div>
+            <div class="sub-filter-tabs">
+                <button class="sub-filter-tab active fiscal-sub-tab" data-sub="ALL">Todos</button>
+                <button class="sub-filter-tab fiscal-sub-tab" data-sub="Nota Técnica">Notas Técnicas</button>
+                <button class="sub-filter-tab fiscal-sub-tab" data-sub="Perguntas Frequentes">FAQs</button>
+                <button class="sub-filter-tab fiscal-sub-tab" data-sub="Informe">Informes</button>
+            </div>
+        </div>
+
+        <!-- Subfiltros para Comunidade (Escondidos por padrão) -->
+        <div class="sub-filter-container" id="communitySubContainer" style="display: none;">
+            <div class="sub-filter-label">Tipo (Comunidade):</div>
+            <div class="sub-filter-tabs">
+                <button class="sub-filter-tab active community-sub-tab" data-sub="ALL">Todos</button>
+                <button class="sub-filter-tab community-sub-tab" data-sub="Dúvida">Dúvidas</button>
+                <button class="sub-filter-tab community-sub-tab" data-sub="Notícia">Notícias</button>
+                <button class="sub-filter-tab community-sub-tab" data-sub="Discussão">Discussões</button>
+            </div>
+        </div>
+
+        <div class="main-layout">
+            <div class="topics-column">
+                <!-- Seção 1: Radar Fiscal -->
+                <div class="section-header fiscal-header">
+                    <span class="icon">🔍</span> Radar Fiscal e SEFAZ
+                </div>
+                <div class="topics-list" id="fiscalContainer">
+                    <!-- Fiscal topics will be injected here -->
+                </div>
+
+                <!-- Seção 2: Comunidade -->
+                <div class="section-header community-header">
+                    <span class="icon">💬</span> Discussões da Comunidade
+                </div>
+                <div class="topics-list" id="communityContainer">
+                    <!-- Community topics will be injected here -->
+                </div>
+            </div>
+
+            <aside class="sidebar-column">
+                <div class="sidebar-widget">
+                    <h3>Ranking de Especialistas</h3>
+                    <div class="leaderboard-empty">
+                        Participe das discussões para subir no ranking!
+                    </div>
+                </div>
+
+                <div class="sidebar-widget">
+                    <h3>Tags Populares</h3>
+                    <div class="tags-cloud">
+                        <span class="tag">NF-e</span>
+                        <span class="tag">best practice</span>
+                        <span class="tag">Sefaz</span>
+                        <span class="tag">Rejeição</span>
+                        <span class="tag">IRPF</span>
+                        <span class="tag">CNAE</span>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div> <!-- mainContent -->
+    <script src="main.js"></script>
+</body>
+</html>

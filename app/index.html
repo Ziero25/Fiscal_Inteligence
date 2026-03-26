@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Inteligência Fiscal - Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="landing-body">
+    <!-- Loader -->
+    <div id="pageLoader" class="page-loader hidden">
+        <div class="loader-content">
+            <div class="loader-bolt">⚡</div>
+            <div class="loader-text">Processando Inteligência...</div>
+        </div>
+    </div>
+
+    <div id="mainContent" class="content-fade-in">
+        <header class="header">
+            <div class="header-container">
+                <div class="logo">
+                    <div class="logo-icon">⚡</div>
+                    <span class="logo-text"><span class="logo-bold">Fiscal</span><span class="logo-light">Intelligence</span></span>
+                </div>
+                <nav style="display: flex; gap: 20px;">
+                    <a href="dashboard.html" class="nav-link-transition" style="color: #94a3b8; text-decoration: none; font-weight: 500;">Portal</a>
+                    <a href="#" style="color: #94a3b8; text-decoration: none; font-weight: 500;">Documentação</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero">
+                <h1 class="hero-title">Inteligência Fiscal em Tempo Real</h1>
+                <p class="hero-subtitle">
+                    A plataforma centralizada para monitoramento de Notas Técnicas, 
+                    discussões contábeis e alertas da SEFAZ. Tome decisões rápidas com dados processados em paralelo.
+                </p>
+            </section>
+
+            <section class="card-grid">
+                <a href="dashboard.html?tab=Fiscal" class="landing-card nav-link-transition">
+                    <div class="card-icon">🛡️</div>
+                    <h2 class="card-title">Radar Fiscal & SEFAZ</h2>
+                    <p class="card-desc">
+                        Acompanhe Notas Técnicas, Informes e Agendamentos da SVC-AN com análise técnica detalhada e prazos.
+                    </p>
+                    <div class="cta-button">Acessar Radar</div>
+                </a>
+
+                <a href="dashboard.html?tab=Contabil" class="landing-card nav-link-transition">
+                    <div class="card-icon">👥</div>
+                    <h2 class="card-title">Comunidade Contábil</h2>
+                    <p class="card-desc">
+                        Fórum de discussões reais, dúvidas de IRPF e atualizações legislativas da comunidade de especialistas.
+                    </p>
+                    <div class="cta-button">Ver Discussões</div>
+                </a>
+
+                <a href="dashboard.html?tab=ALL" class="landing-card nav-link-transition">
+                    <div class="card-icon">📊</div>
+                    <h2 class="card-title">Dashboard Unificado</h2>
+                    <p class="card-desc">
+                        Visão global de todas as fontes de dados em uma única tela com filtros avançados por data e tipo.
+                    </p>
+                    <div class="cta-button">Abrir Dashboard</div>
+                </a>
+            </section>
+        </main>
+
+        <footer style="margin-top: auto; padding: 40px 20px; text-align: center; color: #475569; border-top: 1px solid rgba(255,255,255,0.05);">
+            <p>&copy; 2026 FiscalIntelligence Portal. Dados atualizados a cada 2 horas.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loader = document.getElementById('pageLoader');
+            const mainContent = document.getElementById('mainContent');
+            const transitionLinks = document.querySelectorAll('.nav-link-transition');
+
+            transitionLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetUrl = link.href;
+
+                    // Iniciar saída
+                    document.body.classList.add('no-scroll');
+                    mainContent.classList.add('page-exit');
+                    setTimeout(() => {
+                        loader.classList.remove('hidden');
+                        setTimeout(() => {
+                            window.location.href = targetUrl;
+                        }, 400); // Tempo para o loader aparecer bem
+                    }, 300); // Tempo do fade-out
+                });
+            });
+        });
+    </script>
+</body>
+</html>

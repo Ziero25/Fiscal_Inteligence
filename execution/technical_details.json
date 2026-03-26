@@ -1,0 +1,36 @@
+{
+  "NT 2024.003": {
+    "Highlights": [
+      "Remoção da Rejeição 771 para operações de cabotagem e e-commerce estrangeiro.",
+      "Criação do Grupo ZF para detalhamento de defensivos agrícolas e receituário.",
+      "Obrigação de CPF do responsável técnico no grupo de agrotóxicos.",
+      "Ajustes nas regras de validação de GTA (Guia de Trânsito Animal) para emissão normal.",
+      "Exceção de validação para NCMs de produtos biológicos (3808.91.93, etc.)."
+    ],
+    "Impact": "Crítico para o setor agropecuário e logístico. Emissores devem atualizar o layout para o Grupo ZF e remover travas de identificador estrangeiro em cabotagem.",
+    "Urgency": "Crítica",
+    "Deadline": "20/03/2026",
+    "FullContent": "A Nota Técnica 2024.003 v.1.09 introduz mudanças profundas no ecossistema NF-e Agro.\n\n📌 PRINCIPAIS MUDANÇAS:\n- Remoção da Rejeição 771: Agora são permitidas operações de consumo por embarcações estrangeiras em regime de cabotagem e e-commerce com adquirentes estrangeiros sem bloqueios indevidos.\n- Grupo ZF (Dados Agro): Registro detalhado de defensivos agrícolas, incluindo número do receituário e CPF do responsável técnico.\n- Rastreabilidade GTA: As Guias de Trânsito Animal foram integradas com regras de validação mais rigorosas para garantir a conformidade sanitária.\n- NCMs Biológicos: Produtos biológicos específicos foram excluídos da regra de rejeição de agrotóxicos para simplificar a operação.\n\n⚠️ IMPACTO NO ERP:\nExige alteração no esquema XML para suportar o novo Grupo ZF. Softwares que operam em portos (cabotagem) devem remover a validação de ID estrangeiro imediatamente.\n\n🔴 CRONOGRAMA:\nImplantação definitiva em 20/03/2026."
+  },
+  "SVC-AN": {
+    "Highlights": [
+      "Ativação programada para manutenções de SEFAZ estaduais.",
+      "Ambiente Nacional da Receita Federal atua como espelho.",
+      "Sincronização de notas emitidas em contingência após o retorno do serviço original."
+    ],
+    "Impact": "Essencial para evitar paradas na expedição. O sistema deve detectar automaticamente a indisponibilidade do WebService estadual e alternar para a URL da SVC-AN.",
+    "Urgency": "Alta",
+    "FullContent": "O Agendamento SVC-AN (Sefaz Virtual de Contingência) define os períodos em que o Ambiente Nacional assumirá o processamento das notas de estados em manutenção.\n\n📌 CALENDÁRIO DE MANUTENÇÕES 2026:\n- SEFAZ-SP: 08/03/2026 (08:00 às 11:00).\n- SEFAZ-BA: 01/02/2026 (00:00 às 06:00).\n- Transição Reforma Tributária: Monitoramento intensivo em Maio/2026 para implementação de CBS/IBS.\n\n⚠️ DICA PARA EMISSORES:\nConfigure seu sistema para monitorar o status do serviço. Quando o status retornar 'indisponível', o chaveamento para a SVC-AN deve ser imediato para evitar filas de documentos parados."
+  },
+  "Reforma Tributária": {
+    "Highlights": [
+      "Implementação de CBS e IBS com alíquota de 1% em 2026.",
+      "Novos campos de destaque individualizado de impostos no XML.",
+      "Novos documentos: NFAg (Água) e NF-e ABI (Imóveis)."
+    ],
+    "Impact": "Mudança estrutural mais importante da década. Afeta a lógica de cálculo de todos os impostos no ERP.",
+    "Urgency": "Crítica",
+    "Deadline": "04/05/2026",
+    "FullContent": "A transição para o novo modelo de tributação do consumo começa a ganhar forma técnica em 2026.\n\n📌 O QUE ESTÁ VINDO:\n- Alíquota de Teste: Destaque de 1% para IBS e CBS a partir de maio.\n- Novos Documentos Fiscais: Introdução da NF-e para Alienação de Bens Imóveis e Notas de Saneamento.\n- Campos XML: Novos grupos de tributação específica para permitir a convivência do modelo antigo com o novo.\n\n⚠️ AÇÃO RECOMENDADA:\nInicie o mapeamento de campos IBS/CBS no seu motor de cálculo. O layout da NF-e sofrerá atualizações constantes ao longo do segundo semestre de 2025 para suportar essa virada em 2026."
+  }
+}

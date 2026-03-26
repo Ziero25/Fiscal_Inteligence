@@ -1,6 +1,27 @@
+# Project Specific
 .tmp/
 .env
 credentials.json
 token.json
+
+# Dependencies
+node_modules/
+app/node_modules/
+dist/
+
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# IDEs & System
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log

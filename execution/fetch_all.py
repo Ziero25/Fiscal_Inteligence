@@ -11,6 +11,8 @@ from typing import List, Dict, Any, Optional, cast, Set
 import requests
 from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor, as_completed
+import PyPDF2
+import io
 
 BASE_DIR   = pathlib.Path(__file__).parent.parent
 OUTPUT     = BASE_DIR / "app" / "data2.json"
@@ -189,8 +191,28 @@ def fetch_gov_portal() -> List[Dict[str, Any]]:
                             s_detail = BeautifulSoup(rd.text, "lxml")
                             detail_body = s_detail.find(id="ctl00_ContentPlaceHolder1_pnlConteudo") or s_detail.find(class_="conteudo")
                             if detail_body:
-                                body_text = detail_body.get_text(" ", strip=True)
+                                body_text += " " + detail_body.get_text(" ", strip=True)
                     except: pass
+                
+                # Busca em PDF na Memória: Se corpo estiver curto E for link de arquivo direto
+                if len(body_text.strip()) < 100 and href and ("exibirArquivo" in href.lower() or href.endswith(".pdf")):
+                    try:
+                        rd = requests.get(href, timeout=10, verify=False)
+                        if rd.status_code == 200 and b"%PDF" in rd.content[:10]:
+                            pdf_file = io.BytesIO(rd.content)
+                            pdf_reader = PyPDF2.PdfReader(pdf_file)
+                            pages_text = []
+                            for page_num in range(min(2, len(pdf_reader.pages))):
+                                page = pdf_reader.pages[page_num]
+                                text = page.extract_text()
+                                if text: pages_text.append(text.strip())
+                            
+                            extracted_pdf = " ".join(pages_text)
+                            extracted_pdf = re.sub(r'\\s+', ' ', extracted_pdf)
+                            if len(extracted_pdf) > 20:
+                                body_text = extracted_pdf
+                    except Exception as e:
+                        print(f"Erro ao extrair PDF em {href}: {e}")
                 
                 # Data
                 m_date = re.search(r"(\d{2}/\d{2}/\d{4})", title + body_text)
@@ -202,12 +224,13 @@ def fetch_gov_portal() -> List[Dict[str, Any]]:
                     except: pass
 
                 # Snippet inteligente
-                is_pdf = href.lower().endswith(".pdf") or "listaConteudo.aspx" not in href
-                if body_text and len(body_text) > 40:
+                is_file = href.lower().endswith(".pdf") or "listaConteudo.aspx" not in href or "exibirArquivo" in href
+                if body_text and len(body_text) > 50:
                     desc = body_text
+                    if is_file: desc = f"📄 [DOWNLOAD PDF]\n\n{desc}"
                 else:
                     desc = enrich_gov_title(title)
-                    if is_pdf: desc = f"📄 [DOWNLOAD PDF]\n\n{desc}"
+                    if is_file: desc = f"📄 [DOWNLOAD PDF]\n\n{desc}"
 
                 # Categorização
                 type_label = default_type

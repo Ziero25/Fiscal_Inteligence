@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 📊 Fiscal Intelligence Portal
 
 > Uma plataforma avançada para agregação, análise e visualização de dados fiscais técnicos (NF-e, Sefaz) e discussões da comunidade.
@@ -68,6 +67,3 @@ O **Fiscal Intelligence Portal** foi desenvolvido para transformar dados brutos 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir uma *Issue* ou enviar um *Pull Request*.
 
 Desenvolvido com ❤️ por [Ziero25](https://github.com/Ziero25).
-=======
-# Fiscal_Inteligence
->>>>>>> da22ed68eec46a51251d50ceff7f320070f12ec6

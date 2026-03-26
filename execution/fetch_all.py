@@ -170,11 +170,15 @@ def fetch_gov_portal() -> List[Dict[str, Any]]:
                 curr = t_elem.next_sibling or (t_elem.parent.next_sibling if t_elem.parent else None)
                 limit = 0
                 while curr and limit < 6:
+                    txt = ""
                     if hasattr(curr, "get_text"):
                         txt = curr.get_text(strip=True)
-                        if txt and len(txt) > 10: 
-                            body_text += txt + " "
-                            limit += 1
+                    elif isinstance(curr, str):
+                        txt = curr.strip()
+                        
+                    if txt and len(txt) > 10: 
+                        body_text += txt + " "
+                        limit += 1
                     curr = curr.next_sibling
                 
                 # Busca específica em detalhe se for página .aspx (Nota Técnica costuma ser)

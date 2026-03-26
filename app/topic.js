@@ -31,6 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const authorName = isGov ? "Sefaz / Receita Federal" : post.Source.replace("Reddit - ", "");
 
             let fullText = post.FullText || post.Snippet || 'Nenhum texto adicional disponível para esta publicação.';
+            
+            // Transformar [DOWNLOAD PDF] em um botão
+            fullText = fullText.replace(/📄 \[DOWNLOAD PDF\]|\[DOWNLOAD PDF\]/g, `<a href="${post.Url}" target="_blank" class="btn-source" style="margin-bottom: 20px; display: inline-flex; align-items: center; gap: 8px;">📄 Fazer Download do PDF original Sefaz</a><br><br>`);
+
             fullText = fullText.replace(/TÃ©cnica/g, 'Técnica').replace(/tÃ©cnica/g, 'técnica')
                              .replace(/atualizaÃ§Ã£o/g, 'atualização').replace(/MudanÃ§a|mudanÃ§a/g, 'mudança')
                              .replace(/publicaÃ§Ã£o/g, 'publicação').replace(/Ã¡rea/g, 'área')

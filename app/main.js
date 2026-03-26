@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const filterTabs = document.querySelectorAll('.filter-tab');
-    const searchInput = document.getElementById('searchInput');
+    const searchInputs = document.querySelectorAll('.search-input');
     const fiscalContainer = document.getElementById('fiscalContainer');
     const communityContainer = document.getElementById('communityContainer');
     const fiscalHeader = document.querySelector('.fiscal-header');
@@ -235,9 +235,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
 
-    searchInput.addEventListener('input', (e) => {
-        searchQuery = e.target.value;
-        renderData();
+    // Listeners for all Search Inputs
+    searchInputs.forEach(input => {
+        input.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            // Sincronizar os outros inputs visualmente
+            searchInputs.forEach(otherInput => {
+                if (otherInput !== e.target) {
+                    otherInput.value = searchQuery;
+                }
+            });
+            renderData();
+        });
     });
 
     // Inicializar render
